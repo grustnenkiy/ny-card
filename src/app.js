@@ -43,6 +43,7 @@ function initSnow() {
         offsetX = canvas.width / 2,
         offsetY = canvas.width * 0.4,
         x,
+        ylim,
         y;
 
     window.addEventListener("click", shakeGlobe);
