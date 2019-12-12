@@ -28,7 +28,7 @@ function init() {
     }
 
     img.crossOrigin = "Anonymous";
-    img.src = "./imgs/town.svg";
+    img.src = "./images/town.svg";
 }
 
 function initSnowFlakesCanvas() {
