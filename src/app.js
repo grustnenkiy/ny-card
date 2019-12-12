@@ -39,12 +39,15 @@ function initSnowFlakesCanvas() {
 }
 
 function initSnow() {
+    var radius = canvas.width * 0.2875,
+        offsetX = canvas.width / 2,
+        offsetY = canvas.width * 0.4,
+        x,
+        y;
+
     window.addEventListener("click", shakeGlobe);
     window.addEventListener("touchstart", shakeGlobe);
     ctx2.fillStyle = "rgba(255,255,255,0.7)";
-    var radius = canvas.width * 0.2875;
-    var offsetX = canvas.width / 2;
-    var offsetY = canvas.width * 0.4;
     flakes = [];
     for (var i = 0; i < amount; i++) {
         x = Math.random() * 2 * radius - radius;
