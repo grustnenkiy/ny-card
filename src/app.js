@@ -28,7 +28,7 @@ function init() {
     }
 
     img.crossOrigin = "Anonymous";
-    img.src = "https://s3-us-west-2.amazonaws.com/s.cdpn.io/127738/town.svg";
+    img.src = "./imgs/town.svg";
 }
 
 function initSnowFlakesCanvas() {
@@ -48,7 +48,7 @@ function initSnow() {
 
     window.addEventListener("click", shakeGlobe);
     window.addEventListener("touchstart", shakeGlobe);
-    
+
     ctx2.fillStyle = "rgba(255,255,255,0.7)";
     flakes = [];
 
