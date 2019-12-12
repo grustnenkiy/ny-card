@@ -48,22 +48,28 @@ function initSnow() {
 
     window.addEventListener("click", shakeGlobe);
     window.addEventListener("touchstart", shakeGlobe);
+    
     ctx2.fillStyle = "rgba(255,255,255,0.7)";
     flakes = [];
+
     for (var i = 0; i < amount; i++) {
         x = Math.random() * 2 * radius - radius;
         ylim = Math.sqrt(radius * radius - x * x);
         y = Math.random() * ylim - ylim;
         flakes.push(new Flake(x + offsetX, y + offsetY));
     }
+
     if (rafAnim === null) {
         rafAnim = window.requestAnimationFrame(render);
     }
 }
 
 function Flake(x, y, color) {
+    var destination;
+
     this.x = Math.floor(x);
     this.y = Math.floor(y);
+
     for (var i = this.y; i < canvas.width; i++) {
         if (data[((this.x + (canvas.width * i)) * 4 + 3)] > 10) {
             destination = parseInt(i - 1);
@@ -72,6 +78,7 @@ function Flake(x, y, color) {
             destination = canvas.width;
         }
     }
+
     this.finalY = destination;
     this.r = Math.random() * 2;
     this.speedY = Math.random() + 0.2;
@@ -81,6 +88,7 @@ Flake.prototype.render = function () {
     if (this.finalY > this.y) {
         this.y += this.speedY;
     }
+
     ctx2.beginPath();
     ctx2.arc(this.x, this.y, this.r, Math.PI * 2, false);
     ctx2.fill();
@@ -89,25 +97,30 @@ Flake.prototype.render = function () {
 function render(a) {
     window.requestAnimationFrame(render);
     ctx2.clearRect(0, 0, canvas2.width, canvas2.height);
+
     for (var i = 0; i < amount; i++) {
         flakes[i].render();
     }
 };
 
 function shakeGlobe() {
+    var globe = document.querySelector("#globe");
+
     window.removeEventListener("click", shakeGlobe);
     window.removeEventListener("touchstart", shakeGlobe);
-    var globe = document.querySelector("#globe");
+
     TweenMax.to(canvas2, 0.5, {
         opacity: 0
     });
+
     TweenMax.to(globe, .1, {
         rotationZ: 25,
         ease: Quad.easeInOut,
         yoyo: true,
         repeat: 5,
         onComplete: initSnow
-    })
+    });
+
     TweenMax.to(canvas2, 0.5, {
         opacity: 1,
         delay: "0.6"
